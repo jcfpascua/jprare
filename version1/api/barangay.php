@@ -17,9 +17,9 @@ switch ($method) {
 
     case "POST":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['barangay_name'], $data['cityID'])) {
+        if (isset($data['barangayName'], $data['cityID'])) {
             $stmt = $conn->prepare("INSERT INTO barangay (barangayName, cityID) VALUES (?, ?)");
-            $stmt->execute([$data['barangay_name'], $data['cityID']]);
+            $stmt->execute([$data['barangayName'], $data['cityID']]);
             echo json_encode(["message" => "Barangay added"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);
@@ -28,9 +28,9 @@ switch ($method) {
 
     case "PUT":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['barangayID'], $data['barangay_name'], $data['cityID'])) {
+        if (isset($data['barangayID'], $data['barangayName'], $data['cityID'])) {
             $stmt = $conn->prepare("UPDATE barangay SET barangayName = ?, cityID = ? WHERE barangayID = ?");
-            $stmt->execute([$data['barangay_name'], $data['cityID'], $data['barangayID']]);
+            $stmt->execute([$data['barangayName'], $data['cityID'], $data['barangayID']]);
             echo json_encode(["message" => "Barangay updated"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);

@@ -3,55 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Management</title>
+    <title>Data Management</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h2>Database Management</h2>
+    <h1>Data Management</h1>
 
+    <!-- Parent Tab Links -->
     <div class="tab">
-        <button class="tablinks" onclick="openTable(event, 'customers')">Customers</button>
-<button class="tablinks" onclick="openTable(event, 'city')">City</button>
-<button class="tablinks" onclick="openTable(event, 'barangay')">Barangay</button>
-<button class="tablinks" onclick="openTable(event, 'street')">Street</button>
-<button class="tablinks" onclick="openTable(event, 'address')">Address</button>
-<button class="tablinks" onclick="openTable(event, 'customer_order')">Customer Orders</button>
-<button class="tablinks" onclick="openTable(event, 'customer_order_details')">Order Details</button>
-<button class="tablinks" onclick="openTable(event, 'item')">Items</button>
-<button class="tablinks" onclick="openTable(event, 'merchant')">Merchants</button>
-<button class="tablinks" onclick="openTable(event, 'merchant_order')">Merchant Orders</button>
-<button class="tablinks" onclick="openTable(event, 'merchant_order_details')">Merchant Order Details</button>
-<button class="tablinks" onclick="openTable(event, 'expense')">Expenses</button>
-<button class="tablinks" onclick="openTable(event, 'expense_type')">Expense Type</button>
-<button class="tablinks" onclick="openTable(event, 'expense_details')">Expense Details</button>
-<button class="tablinks" onclick="openTable(event, 'contact_details')">Contact Details</button>
-<button class="tablinks" onclick="openTable(event, 'contact_type')">Contact Type</button>
-<button class="tablinks" onclick="openTable(event, 'supplier')">Suppliers</button>
+        <button class="tablinks" onclick="openTab(event, 'Location')">Location</button>
+        <button class="tablinks" onclick="openTab(event, 'Customers')">Customers</button>
+        <button class="tablinks" onclick="openTab(event, 'Inventory')">Inventory</button>
+        <button class="tablinks" onclick="openTab(event, 'Merchants')">Merchants</button>
+        <button class="tablinks" onclick="openTab(event, 'Expenses')">Expenses</button>
+        <button class="tablinks" onclick="openTab(event, 'Suppliers')">Suppliers</button>
     </div>
-    
 
-    <button id="addRecordBtn">Add New Record</button>
-
-    <table id="dataTable">
-        <thead>
-            <tr id="tableHeaders"></tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
-
-    <!-- Modal Form -->
-    <div id="formModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3 id="formTitle">Add Record</h3>
-            <form id="dataForm">
-                <div id="formFields"></div>
-                <button type="submit">Save</button>
+    <!-- Parent Tab Content -->
+    <div id="Location" class="tabcontent">
+        <h2>Location</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'City')">City</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'Barangay')">Barangay</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'Street')">Street</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'Address')">Address</button>
+        </div>
+        <div id="City" class="subtabcontent" style="display:none;">
+            <h3>City List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>City ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody id="cityTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="cityForm">
+                <input type="number" id="cityId" placeholder="City ID" />
+                <input type="text" id="cityName" placeholder="City Name" />
+                <button type="submit">Add City</button>
+            </form>
+        </div>
+        <div id="Barangay" class="subtabcontent" style="display:none;">
+            <h3>Barangay List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Barangay ID</th>
+                        <th>Barangay Name</th>
+                        <th>City ID</th>
+                    </tr>
+                </thead>
+                <tbody id="barangayTableBody">
+                    <!-- Barangay rows will be populated here -->
+                </tbody>
+            </table>
+            <form id="barangayForm">
+                <input type="number" id="barangayId" placeholder="Barangay ID" />
+                <input type="text" id="barangayName" placeholder="Barangay Name" />
+                <input type="number" id="cityId" placeholder="City ID" />
+                <button type="submit">Add Barangay</button>
+            </form>
+        </div>
+        <div id="Street" class="subtabcontent" style="display:none;">
+            <h3>Street List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Street ID</th>
+                        <th>Name</th>
+                        <th>Barangay ID</th>
+                    </tr>
+                </thead>
+                <tbody id="streetTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="streetForm">
+                <input type="number" id="streetId" placeholder="Street ID" />
+                <input type="text" id="streetName" placeholder="Street Name" />
+                <input type="number" id="barangayId" placeholder="Barangay ID" />
+                <button type="submit">Add Street</button>
+            </form>
+        </div>
+        <div id="Address" class="subtabcontent" style="display:none;">
+            <h3>Address List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Address ID</th>
+                        <th>Description</th>
+                        <th>Street ID</th>
+                    </tr>
+                </thead>
+                <tbody id="addressTableBody">
+                    <!-- Address rows will be populated here -->
+                </tbody>
+            </table>
+            <form id="addressForm">
+                <input type="number" id="addressId" placeholder="Address ID" />
+                <input type="text" id="addressDescription" placeholder="Description" />
+                <input type="number" id="streetId" placeholder="Street ID" />
+                <button type="submit">Add Address</button>
             </form>
         </div>
     </div>
 
+    <div id="Customers" class="tabcontent" style="display:none;">
+        <h2>Customers</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'Customer')">Customer</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'CustomerOrder')">Customer Order</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'OrderDetails')">Order Details</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'ContactDetails')">Contact Details</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'ContactType')">Contact Type</button>
+        </div>
+        <div id="Customer" class="subtabcontent" style="display:none;">
+            <h3>Customer List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address ID</th>
+                    </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="customerForm">
+                <input type="number" id="customerId" placeholder="Customer ID" />
+                <input type="text" id="customerName" placeholder="Customer Name" />
+                <input type="number" id="customerAddressId" placeholder="Address ID" />
+                <button type="submit">Add Customer</button>
+            </form>
+        </div>
+        <div id="CustomerOrder" class="subtabcontent" style="display:none;">
+            <h3>Customer Order List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer ID</th>
+                        <th>Order Date</th>
+                        <th>Merchant ID</th>
+                    </tr>
+                </thead>
+                <tbody id="customerOrderTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="customerOrderForm">
+                <input type="number" id="orderId" placeholder="Order ID" />
+                <input type="number" id="customerId" placeholder="Customer ID" />
+                <input type="date" id="orderDate" placeholder="Order Date" />
+                <input type="number" id="merchantId" placeholder="Merchant ID" />
+                <button type="submit">Add Order</button>
+            </form>
+        </div>
+        <div id="OrderDetails" class="subtabcontent" style="display:none;">
+            <h3>Order Details List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail ID</th>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="customerOrderDetailsTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="orderDetailsForm">
+                <input type="number" id="detailId" placeholder="Detail ID" />
+                <input type="number" id="orderId" placeholder="Order ID" />
+                <input type="number" id="itemId" placeholder="Item ID" />
+                <input type="number" id="quantity" placeholder="Quantity" />
+                <input type="number" id="total" placeholder="Total" />
+                <button type="submit">Add Order Detail</button>
+            </form>
+        </div>
+        <div id="ContactDetails" class="subtabcontent" style="display:none;">
+            <h3>Contact Details List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Contact ID</th>
+                        <th>Customer ID</th>
+                        <th>Contact Type ID</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="contactDetailsTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="contactDetailsForm">
+                <input type="number" id="contactId" placeholder="Contact ID" />
+                <input type="number" id="customerId" placeholder="Customer ID" />
+                <input type="number" id="contactTypeId" placeholder="Contact Type ID" />
+                <input type="text" id="value" placeholder="Contact Value" />
+                <button type="submit">Add Contact Detail</button>
+            </form>
+        </div>
+        <div id="ContactType" class="subtabcontent" style="display:none;">
+            <h3>Contact Type List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type ID</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="contactTypeTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="contactTypeForm">
+                <input type="number" id="contactTypeId" placeholder="Type ID" />
+                <input type="text" id="contactDescription" placeholder="Description" />
+                <button type="submit">Add Contact Type</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="Inventory" class="tabcontent" style="display:none;">
+        <h2>Inventory</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'InventoryItems')">Inventory Items</button>
+        </div>
+        <div id="InventoryItems" class="subtabcontent" style="display:none;">
+            <h3>Inventory Items List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="inventoryItemsForm">
+                <input type="number" id="itemId" placeholder="Item ID" />
+                <input type="text" id="itemName" placeholder="Item Name" />
+                <button type="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="Merchants" class="tabcontent" style="display:none;">
+        <h2>Merchants</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'Merchant')">Merchant</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'MerchantOrders')">Merchant Orders</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'MerchantOrderDetails')">Merchant Order Details</button>
+        </div>
+        <div id="Merchant" class="subtabcontent" style="display:none;">
+            <h3>Merchant List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Merchant ID</th>
+                        <th>Name</th>
+                        <th>Address ID</th>
+                    </tr>
+                </thead>
+                <tbody id="merchantTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="merchantForm">
+                <input type="number" id="merchantId" placeholder="Merchant ID" />
+                <input type="text" id="merchantName" placeholder="Merchant Name" />
+                <input type="number" id="merchantAddressId" placeholder="Address ID" />
+                <button type="submit">Add Merchant</button>
+            </form>
+        </div>
+        <div id="MerchantOrders" class="subtabcontent" style="display:none;">
+            <h3>Merchant Orders List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Merchant ID</th>
+                        <th>Order Date</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="merchantOrderTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="merchantOrderForm">
+                <input type="number" id="merchantOrderId" placeholder="Order ID" />
+                <input type="number" id="merchantId" placeholder="Merchant ID" />
+                <input type="date" id="merchantOrderDate" placeholder="Order Date" />
+                <input type="number" id="customerId" placeholder="Customer ID" />
+                <button type="submit">Add Order</button>
+            </form>
+        </div>
+        <div id="MerchantOrderDetails" class="subtabcontent" style="display:none;">
+            <h3>Merchant Order Details List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail ID</th>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Quantity</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="merchantOrderDetailsTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="merchantOrderDetailsForm">
+                <input type="number" id="detailId" placeholder="Detail ID" />
+                <input type="number" id="orderId" placeholder="Order ID" />
+                <input type="number" id="itemId" placeholder="Item ID" />
+                <input type="number" id="quantity" placeholder="Quantity" />
+                <input type="text" id="details" placeholder="Details" />
+                <button type="submit">Add Order Detail</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="Expenses" class="tabcontent" style="display:none;">
+        <h2>Expenses</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'Expense')">Expense</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'ExpenseType')">Expense Type</button>
+            <button class="subtablinks" onclick="openSubTab(event, 'ExpenseDetails')">Expense Details</button>
+        </div>
+        <div id="Expense" class="subtabcontent" style="display:none;">
+            <h3>Expense List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense ID</th>
+                        <th>Description</th>
+                        <th>Expense Date</th>
+                        <th>Merchant ID</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="expenseForm">
+                <input type="number" id="expenseId" placeholder="Expense ID" />
+                <input type="text" id="expenseDescription" placeholder="Description" />
+                <input type="number" id="expenseAmount" placeholder="Amount" />
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+        <div id="ExpenseType" class="subtabcontent" style="display:none;">
+            <h3>Expense Type List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type ID</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseTypeTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="expenseTypeForm">
+                <input type="number" id="expenseTypeId" placeholder="Type ID" />
+                <input type="text" id="expenseTypeDescription" placeholder="Description" />
+                <button type="submit">Add Expense Type</button>
+            </form>
+        </div>
+        <div id="ExpenseDetails" class="subtabcontent" style="display:none;">
+            <h3>Expense Details List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail ID</th>
+                        <th>Expense ID</th>
+                        <th>Expense Type ID</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseDetailsTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="expenseDetailsForm">
+                <input type="number" id="expenseDetailId" placeholder="Detail ID" />
+                <input type="number" id="expenseId" placeholder="Expense ID" />
+                <input type="number" id="expenseTypeId" placeholder="Expense Type ID" />
+                <input type="number" id="expenseDetailAmount" placeholder="Amount" />
+                <input type="number" id="expenseDetailQuantity" placeholder="Quantity" />
+                <input type="number" id="expenseDetailSubtotal" placeholder="Subtotal" />
+                <button type="submit">Add Expense Detail</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="Suppliers" class="tabcontent" style="display:none;">
+        <h2>Suppliers</h2>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubTab(event, 'Supplier')">Supplier</button>
+        </div>
+        <div id="Supplier" class="subtabcontent" style="display:none;">
+            <h3>Supplier List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Supplier ID</th>
+                        <th>Name</th>
+                        <th>Address ID</th>
+                    </tr>
+                </thead>
+                <tbody id="supplierTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+            <form id="supplierForm">
+                <input type="number" id="supplierId" placeholder="Supplier ID" />
+                <input type="text" id="supplierName" placeholder="Supplier Name" />
+                <input type="text" id="supplierContact" placeholder="Address ID" />
+                <button type="submit">Add Supplier</button>
+            </form>
+        </div>
+        
     <script src="script.js"></script>
+    <script>
+        function openTab(evt, tableName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tableName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        function openSubTab(evt, subTableName) {
+            var i, subtabcontent, subtablinks;
+            subtabcontent = document.getElementsByClassName("subtabcontent");
+            for (i = 0; i < subtabcontent.length; i++) {
+                subtabcontent[i].style.display = "none";
+            }
+
+            subtablinks = document.getElementsByClassName("subtablinks");
+            for (i = 0; i < subtablinks.length; i++) {
+                subtablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(subTableName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Open the default tab and subtab
+        document.querySelector(".tablinks").click();
+        document.querySelector(".subtablinks").click();
+    </script>
 </body>
 </html>

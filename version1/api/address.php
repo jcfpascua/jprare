@@ -17,9 +17,9 @@ switch ($method) {
 
     case "POST":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['description'], $data['line'], $data['streetID'])) {
-            $stmt = $conn->prepare("INSERT INTO address (description, line, streetID) VALUES (?, ?, ?)");
-            $stmt->execute([$data['description'], $data['line'], $data['streetID']]);
+        if (isset($data['description'], $data['streetID'])) {
+            $stmt = $conn->prepare("INSERT INTO address (description, streetID) VALUES (?, ?)");
+            $stmt->execute([$data['description'], $data['streetID']]);
             echo json_encode(["message" => "Address added"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);
@@ -28,9 +28,9 @@ switch ($method) {
 
     case "PUT":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['addressID'], $data['description'], $data['line'], $data['streetID'])) {
-            $stmt = $conn->prepare("UPDATE address SET description = ?, line = ?, streetID = ? WHERE addressID = ?");
-            $stmt->execute([$data['description'], $data['line'], $data['streetID'], $data['addressID']]);
+        if (isset($data['addressID'], $data['description'], $data['streetID'])) {
+            $stmt = $conn->prepare("UPDATE address SET description = ?, streetID = ? WHERE addressID = ?");
+            $stmt->execute([$data['description'], $data['streetID'], $data['addressID']]);
             echo json_encode(["message" => "Address updated"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);

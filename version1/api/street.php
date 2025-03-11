@@ -17,9 +17,9 @@ switch ($method) {
 
     case "POST":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['street_name'], $data['barangayID'])) {
-            $stmt = $conn->prepare("INSERT INTO street (streetname, barangayID) VALUES (?, ?)");
-            $stmt->execute([$data['street_name'], $data['barangayID']]);
+        if (isset($data['streetName'], $data['barangayID'])) {
+            $stmt = $conn->prepare("INSERT INTO street (streetName, barangayID) VALUES (?, ?)");
+            $stmt->execute([$data['streetName'], $data['barangayID']]);
             echo json_encode(["message" => "Street added"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);
@@ -28,9 +28,9 @@ switch ($method) {
 
     case "PUT":
         $data = json_decode(file_get_contents("php://input"), true);
-        if (isset($data['streetID'], $data['street_name'], $data['barangayID'])) {
-            $stmt = $conn->prepare("UPDATE street SET streetname = ?, barangayID = ? WHERE streetID = ?");
-            $stmt->execute([$data['street_name'], $data['barangayID'], $data['streetID']]);
+        if (isset($data['streetID'], $data['streetName'], $data['barangayID'])) {
+            $stmt = $conn->prepare("UPDATE street SET streetName = ?, barangayID = ? WHERE streetID = ?");
+            $stmt->execute([$data['streetName'], $data['barangayID'], $data['streetID']]);
             echo json_encode(["message" => "Street updated"]);
         } else {
             echo json_encode(["error" => "Invalid input"]);

@@ -1,4 +1,37 @@
 <?php
+// CRUD Functions for Supplier
+
+// Create a new supplier
+function createSupplier($conn, $name, $contact) {
+    $sql = "INSERT INTO suppliers (name, contact) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $name, $contact);
+    return $stmt->execute();
+}
+
+// Read all suppliers
+function getSuppliers($conn) {
+    $sql = "SELECT * FROM supplier";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+// Update a supplier
+function updateSupplier($conn, $id, $name, $contact) {
+    $sql = "UPDATE supplier SET name = ?, contact = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssi", $name, $contact, $id);
+    return $stmt->execute();
+}
+
+// Delete a supplier
+function deleteSupplier($conn, $id) {
+    $sql = "DELETE FROM supplier WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+}
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE');
